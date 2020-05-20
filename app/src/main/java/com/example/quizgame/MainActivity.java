@@ -1,5 +1,6 @@
 package com.example.quizgame;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.android.volley.Request;
@@ -10,9 +11,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -23,13 +26,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 import org.apache.commons.text.StringEscapeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     TextView responseView ;
+    TextView textView;
+
     RequestQueue queue;
-    Button button;
+
+    Button response1;
+    Button response2;
+    Button response3;
+    Button response4;
+
     String url;
 
     String risposta;
@@ -38,89 +52,95 @@ public class MainActivity extends AppCompatActivity {
     String question;
     String correct_answer;
     ArrayList <String> incorrect_answers;
+    Question q;
 
 
-    public void onButtonClick(View view) {
+    public void onMainMenuButtonClick(View view){
+        setContentView(R.layout.activity_main);
+
+        responseView = findViewById(R.id.responseView);
+        //button =  findViewById(R.id.queryButton);
+        response1 = findViewById(R.id.response1);
+        response2 = findViewById(R.id.response2);
+        response3 = findViewById(R.id.response3);
+        response4 = findViewById(R.id.response4);
 
 
-        jsonParse();
-
-        risposta = question + "\n" + correct_answer + "\n"
-                + incorrect_answers.get(0) + "\n"
-                + incorrect_answers.get(1) + "\n"
-                + incorrect_answers.get(2);
-
-        incorrect_answers.clear();
-
-        risposta = StringEscapeUtils.unescapeHtml4(risposta);
-
-        responseView.setText(risposta);
-
-
-        getQuestion();
+        q.writeResponse(responseView,response1,response2,response3,response4);
+        q.fetchRispostaJSON(queue,url);
 
     }
 
+    public void buttonClickEvent(final Button b){
+        q.incrementQuestionCount();
+        if(b.getText() == q.getCorrect_answer()){
+            b.setBackgroundColor(Color.GREEN);
+            q.incrementCorrectAnswerCount();
+        }
+        else
+            b.setBackgroundColor(Color.RED);
 
-    protected void getQuestion(){
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        rispostaJSON = response;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b.setBackgroundColor(Color.LTGRAY);
+                q.writeResponse(responseView,response1,response2,response3,response4);
+                q.fetchRispostaJSON(queue,url);
+            }
+        }, 100);
 
-                        //risposta = response.toString();
-
-                        Log.e("Rest response",response.toString());
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Rest response",error.toString());
-                    }
-                }
-        );
-
-
-        queue.add(jsonObjectRequest);
-    }
-
-
-    protected void jsonParse(){
-
-        try {
-            rispostaJSON = rispostaJSON.getJSONArray("results").getJSONObject(0);
-
-            question = rispostaJSON.getString("question");
-            correct_answer = rispostaJSON.getString("correct_answer");
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(0));
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(1));
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(2));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if(q.getQuestionCount() == 10){
+            setContentView(R.layout.main_menu);
+            textView = findViewById(R.id.textView);
+            textView.setText("hai ottenuto " + q.getCorrectAnswerCount() + " punti");
+            //textView.setText(Integer.toString(q.getCount()));
+            q.resetQuestionCount();
+            q.resetCorrectAnswerCount();
         }
 
+
     }
+
+    public void response1Click(View view) throws InterruptedException {
+        buttonClickEvent(response1);
+    }
+
+    public void response2Click(View view) {
+        buttonClickEvent(response2);
+    }
+
+    public void response3Click(View view) {
+        buttonClickEvent(response3);
+    }
+
+    public void response4Click(View view) {
+        buttonClickEvent(response4);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_menu);
 
 
-        responseView = findViewById(R.id.responseView);
-        button =  findViewById(R.id.queryButton);
         queue = Volley.newRequestQueue(this);
-        incorrect_answers = new ArrayList<>();
+        incorrect_answers = new ArrayList<String>();
 
 
         url = "https://opentdb.com/api.php?amount=1&type=multiple";
 
-        getQuestion();
 
+
+        rispostaJSON = new JSONObject();
+
+        q = new Question();
+
+
+        q.fetchRispostaJSON(queue,url);
+
+        //getQuestion();
     }
+
 
 }
