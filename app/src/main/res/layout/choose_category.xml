@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/any"
+                android:onClick="onCategoryDefaultClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="any category" />
+
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="30dp"/>
+
+            <Button
+                android:id="@+id/category9"
+                android:onClick="onCategory9Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="general knowlwdge" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category10"
+                android:onClick="onCategory10Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Books" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category11"
+                android:onClick="onCategory11Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Film" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category12"
+                android:onClick="onCategory12Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Music" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category13"
+                android:onClick="onCategory13Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Musicals and theatres" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category14"
+                android:onClick="onCategory14Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="television" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category15"
+                android:onClick="onCategory15Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="videogames" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category16"
+                android:onClick="onCategory16Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="board games" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category17"
+                android:onClick="onCategory17Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="scienze and nature" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category18"
+                android:onClick="onCategory18Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Computers" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category19"
+                android:onClick="onCategory19Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Mathemaitcs" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category20"
+                android:onClick="onCategory20Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Mythology" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category21"
+                android:onClick="onCategory21Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Sports" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category22"
+                android:onClick="onCategory22Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Geography" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category23"
+                android:onClick="onCategory23Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="History" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category24"
+                android:onClick="onCategory24Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Politics" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category25"
+                android:onClick="onCategory25Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Art" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category26"
+                android:onClick="onCategory26Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Celebrities" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category27"
+                android:onClick="onCategory27Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Animals" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category28"
+                android:onClick="onCategory28Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Veichles" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category29"
+                android:onClick="onCategory29Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Comics" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category30"
+                android:onClick="onCategory30Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Gadgets" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category31"
+                android:onClick="onCategory31Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Anime and manga" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <Button
+                android:id="@+id/category32"
+                android:onClick="onCategory32Click"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffcccccc"
+                android:text="Cartoon and animations" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

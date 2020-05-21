@@ -120,7 +120,7 @@ public class Question {
         else if(random == 2)
             randomizeOrder(r2, r3, r1, r4);
         else if(random == 3)
-            randomizeOrder(r2, r2, r3, r1);
+            randomizeOrder(r2, r3, r4, r1);
 
 
         incorrect_answers.clear();

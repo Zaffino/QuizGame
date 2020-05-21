@@ -1,5 +1,6 @@
 package com.example.quizgame;
 
+import android.content.Intent;
 import android.graphics.Color;
 
 import android.os.Bundle;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 q.writeResponse(responseView,response1,response2,response3,response4);
                 q.fetchRispostaJSON(queue,url);
             }
-        }, 100);
+        }, 300);
 
         if(q.getQuestionCount() == 10){
             setContentView(R.layout.main_menu);
@@ -119,8 +120,10 @@ public class MainActivity extends AppCompatActivity {
         incorrect_answers = new ArrayList<String>();
 
 
-        url = "https://opentdb.com/api.php?amount=1&type=multiple";
-
+        if(getIntent().getStringExtra("category") == null)
+            url = "https://opentdb.com/api.php?amount=1&type=multiple";
+        else
+            url = getIntent().getStringExtra("category");
 
 
         rispostaJSON = new JSONObject();
@@ -130,7 +133,12 @@ public class MainActivity extends AppCompatActivity {
 
         q.fetchRispostaJSON(queue,url);
 
+
     }
 
 
+    public void onCategiorieButtonClick(View view) {
+        Intent intent = new Intent(this,ChooseCategory.class);
+        startActivity(intent);
+    }
 }
