@@ -61,7 +61,8 @@ public class Question {
         queue.add(jsonObjectRequest);
     }
 
-    protected void responseParse(){
+    protected void responseParse() throws NullPointerException{
+
 
         try {
             rispostaJSON = rispostaJSON.getJSONArray("results").getJSONObject(0);
@@ -76,10 +77,22 @@ public class Question {
             e.printStackTrace();
         }
 
+
     }
+
+    protected void randomizeOrder(Button r1, Button r2, Button r3, Button r4){
+        r1.setText(correct_answer);
+
+        r2.setText(incorrect_answers.get(0));
+        r3.setText(incorrect_answers.get(1));
+        r4.setText(incorrect_answers.get(2));
+    }
+
 
     protected void writeResponse(TextView textView, Button r1, Button r2, Button r3, Button r4){
         responseParse();
+
+
 
         risposta = question + "\n" + correct_answer + "\n"
                 + incorrect_answers.get(0) + "\n"
@@ -97,12 +110,18 @@ public class Question {
 
 
         textView.setText(question);
-        r1.setText(correct_answer);
 
+        int random = (int) (Math.random()*4);
 
-        r2.setText(incorrect_answers.get(0));
-        r3.setText(incorrect_answers.get(1));
-        r4.setText(incorrect_answers.get(2));
+        if(random == 0)
+            randomizeOrder(r1, r2, r3, r4);
+        else if(random == 1)
+            randomizeOrder(r2, r1, r3, r4);
+        else if(random == 2)
+            randomizeOrder(r2, r3, r1, r4);
+        else if(random == 3)
+            randomizeOrder(r2, r2, r3, r1);
+
 
         incorrect_answers.clear();
 

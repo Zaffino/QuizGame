@@ -1,34 +1,23 @@
 package com.example.quizgame;
 
 import android.graphics.Color;
+
 import android.os.Bundle;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-
-import androidx.annotation.ColorInt;
-import androidx.appcompat.app.AppCompatActivity;
-
-
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONException;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
-import org.apache.commons.text.StringEscapeUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -59,14 +48,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         responseView = findViewById(R.id.responseView);
-        //button =  findViewById(R.id.queryButton);
         response1 = findViewById(R.id.response1);
         response2 = findViewById(R.id.response2);
         response3 = findViewById(R.id.response3);
         response4 = findViewById(R.id.response4);
 
 
+
         q.writeResponse(responseView,response1,response2,response3,response4);
+
+
+
         q.fetchRispostaJSON(queue,url);
 
     }
@@ -93,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.main_menu);
             textView = findViewById(R.id.textView);
             textView.setText("hai ottenuto " + q.getCorrectAnswerCount() + " punti");
-            //textView.setText(Integer.toString(q.getCount()));
             q.resetQuestionCount();
             q.resetCorrectAnswerCount();
         }
@@ -101,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void response1Click(View view) throws InterruptedException {
+    public void response1Click(View view) {
         buttonClickEvent(response1);
     }
 
@@ -139,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
         q.fetchRispostaJSON(queue,url);
 
-        //getQuestion();
     }
 
 
