@@ -16,7 +16,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class Question {
 
@@ -30,10 +29,16 @@ public class Question {
     String correct_answer;
     ArrayList<String> incorrect_answers;
 
-    Queue q;
+
     public Question() {
         this.questionCount = 0;
         this.rispostaJSON = new JSONObject();
+        this.incorrect_answers = new ArrayList<>();
+    }
+
+    public Question(String s) throws JSONException {
+        this.questionCount = 0;
+        this.rispostaJSON = new JSONObject(s);
         this.incorrect_answers = new ArrayList<>();
     }
 
@@ -65,18 +70,23 @@ public class Question {
 
 
         try {
-            rispostaJSON = rispostaJSON.getJSONArray("results").getJSONObject(0);
+            JSONObject temp;
+            temp = rispostaJSON.getJSONArray("results").getJSONObject(questionCount);
 
-            question = rispostaJSON.getString("question");
-            correct_answer = rispostaJSON.getString("correct_answer");
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(0));
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(1));
-            incorrect_answers.add(rispostaJSON.getJSONArray("incorrect_answers").getString(2));
-            rispostaJSON = null;
+            question = temp.getString("question");
+            correct_answer = temp.getString("correct_answer");
+            incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(0));
+            incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(1));
+            incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(2));
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        question = StringEscapeUtils.unescapeHtml4(question);
+        correct_answer = StringEscapeUtils.unescapeHtml4(correct_answer);
+        incorrect_answers.set(0, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(0)));
+        incorrect_answers.set(1, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(1)));
+        incorrect_answers.set(2, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(2)));
 
     }
 
@@ -91,23 +101,6 @@ public class Question {
 
     protected void writeResponse(TextView textView, Button r1, Button r2, Button r3, Button r4){
         responseParse();
-
-
-
-        risposta = question + "\n" + correct_answer + "\n"
-                + incorrect_answers.get(0) + "\n"
-                + incorrect_answers.get(1) + "\n"
-                + incorrect_answers.get(2);
-
-        risposta = StringEscapeUtils.unescapeHtml4(risposta);
-
-
-        question = StringEscapeUtils.unescapeHtml4(question);
-        correct_answer = StringEscapeUtils.unescapeHtml4(correct_answer);
-        incorrect_answers.set(0, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(0)));
-        incorrect_answers.set(1, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(1)));
-        incorrect_answers.set(2, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(2)));
-
 
         textView.setText(question);
 
@@ -155,4 +148,7 @@ public class Question {
         return correctAnswerCount;
     }
 
+    public JSONObject getRispostaJSON() {
+        return rispostaJSON;
+    }
 }
