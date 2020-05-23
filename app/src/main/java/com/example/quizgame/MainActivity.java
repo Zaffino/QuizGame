@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,10 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onMainMenuButtonClick(View view) {
-        Intent intent = new Intent(this,QuizSession.class);
-        intent.putExtra("questions",q.getRispostaJSON().toString());
 
-        startActivity(intent);
+            if(q.getRispostaJSON().length() > 0){
+                Intent intent = new Intent(this,QuizSession.class);
+                intent.putExtra("questions",q.getRispostaJSON().toString());
+
+                startActivity(intent);
+            }
+
+
     }
 
 

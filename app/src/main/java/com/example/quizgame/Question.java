@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -30,6 +31,7 @@ public class Question {
     ArrayList<String> incorrect_answers;
 
 
+
     public Question() {
         this.questionCount = 0;
         this.rispostaJSON = new JSONObject();
@@ -40,6 +42,7 @@ public class Question {
         this.questionCount = 0;
         this.rispostaJSON = new JSONObject(s);
         this.incorrect_answers = new ArrayList<>();
+
     }
 
     protected void fetchRispostaJSON(final RequestQueue queue, final String url){
@@ -63,7 +66,16 @@ public class Question {
                 }
         );
 
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                500,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+
         queue.add(jsonObjectRequest);
+
+
+
     }
 
     protected void responseParse() throws NullPointerException{
@@ -78,21 +90,23 @@ public class Question {
             incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(0));
             incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(1));
             incorrect_answers.add(temp.getJSONArray("incorrect_answers").getString(2));
+
+            question = StringEscapeUtils.unescapeHtml4(question);
+            correct_answer = StringEscapeUtils.unescapeHtml4(correct_answer);
+            incorrect_answers.set(0, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(0)));
+            incorrect_answers.set(1, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(1)));
+            incorrect_answers.set(2, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(2)));
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        question = StringEscapeUtils.unescapeHtml4(question);
-        correct_answer = StringEscapeUtils.unescapeHtml4(correct_answer);
-        incorrect_answers.set(0, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(0)));
-        incorrect_answers.set(1, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(1)));
-        incorrect_answers.set(2, StringEscapeUtils.unescapeHtml4(incorrect_answers.get(2)));
+
 
     }
 
     protected void randomizeOrder(Button r1, Button r2, Button r3, Button r4){
         r1.setText(correct_answer);
-
         r2.setText(incorrect_answers.get(0));
         r3.setText(incorrect_answers.get(1));
         r4.setText(incorrect_answers.get(2));
@@ -151,4 +165,6 @@ public class Question {
     public JSONObject getRispostaJSON() {
         return rispostaJSON;
     }
+
+
 }
