@@ -60,7 +60,7 @@ public class Question {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        fetchRispostaJSON(queue, url);
+                        //fetchRispostaJSON(queue, url);
                         Log.e("Rest response",error.toString());
                     }
                 }

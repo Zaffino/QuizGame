@@ -62,14 +62,14 @@
 
     <TextView
         android:id="@+id/responseView"
-        android:layout_width="369dp"
-        android:layout_height="265dp"
+        android:layout_width="281dp"
+        android:layout_height="250dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:text=""
+        android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
